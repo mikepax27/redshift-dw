@@ -116,7 +116,10 @@ time_table_create = ("""
 staging_events_copy = ("""
 """).format()
 
-staging_songs_copy = ("""
+staging_songs_copy = (f"""
+    COPY staging_songs FROM {config.get('S3','SONG_DATA')}
+    CREDENTIALS 'aws_iam_role={config.get('IAM_ROLE', 'ARN')}'
+    JSON {config.get('S3','LOG_JSONPATH')}
 """).format()
 
 # FINAL TABLES
