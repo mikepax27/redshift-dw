@@ -4,13 +4,21 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
-    for query in drop_table_queries:
+    """
+    Responsible for dropping all the tables used in this ETL processes.
+    """
+    for table, query in drop_table_queries.items():
+        print(f"Droping {table} table")
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
-    for query in create_table_queries:
+    """
+    This funcion create (if not exixts) all the tables used in this ETL processes.
+    """    
+    for table, query in create_table_queries.items():
+        print(f"Creating {table} table")
         cur.execute(query)
         conn.commit()
 
